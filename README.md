@@ -1,5 +1,14 @@
 # alyans-test-vue3
+### **Тестовое задание по на Vue-3** 
+### *(см. описание требований к заданию в файле: junmidFrontEnd.png)* 
 
+### Функционал: 
+* показ карточек, получаемых из API
+* поиск по наименованию
+* пагинация
+* доп. окно с более подробной информацией товара
+
+***
 ## Project setup
 ```
 npm install
@@ -9,11 +18,3 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
