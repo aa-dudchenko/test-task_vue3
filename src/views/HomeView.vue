@@ -1,18 +1,44 @@
 <template>
   <div class="home">
-    <h1 class="title home__title"> Пакемоны </h1>
-    <CatalogPage msg="Welcome to Your Vue.js App"/>
+    
+    <h1 class="home__title"> Pokemons </h1>
+
+    <search-block/>
+    <catalog-page/>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import CatalogPage from '@/components/CatalogPage.vue'
+
+import CatalogPage from '@/components/catalog/CatalogPage.vue'
+import SearchBlock from '@/components/SearchBlock.vue'
+
 
 export default {
   name: 'HomeView',
+
   components: {
-    CatalogPage
+    CatalogPage,
+    SearchBlock,
   }
 }
 </script>
+
+
+<style lang="scss">
+  @import '../styles/style.scss';
+  
+  .home {
+    
+    &__title {
+      color: $clr-dark;
+      text-align: center;
+      margin-top: $mrg-mini;
+      font-size: 50px;
+      @include text-shadow($clr-white)
+    }
+  }
+
+
+</style>
