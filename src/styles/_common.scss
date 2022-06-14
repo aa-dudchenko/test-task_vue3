@@ -1,48 +1,25 @@
 .title {
   font-size: 32px;
   color: $clr-dark;
-  border-bottom: 2px solid $clr-dark;
   padding: 0 15px 0 10px;
-  display: inline-block;
-  @include text-shadow($clr-blue)
+  @include text-shadow($clr-blue);
+  position: relative;
 }
 
-.list {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 18px 8px;
 
-  &__item {
-    display: block;
-    @include text-shadow($clr-dark);
-    transition: all .3s;
-    cursor: pointer;
+.link {
+  transition: all .3s;
+  cursor: pointer;
 
-    &:hover {
-      @include text-shadow($clr-blue)
-    }
-
-    &:after {
-      content: "";
-      display: block;
-      position: relative;
-      z-index: -1;
-      width: 0%;
-      margin: auto;
-      border-bottom: 3px solid $clr-white;
-      border-radius: 3px;
-      bottom: 0px;
-      transition: all .3s;
-    }
-    
-    &:hover:after {
-      width: 100%;
-    }
+  &:hover {
+    @include text-shadow($clr-blue)
   }
 
-  &__item-link {
-    // ==================
+  &:after {
+    @include hr-after(0%);
+  }
+
+  &:hover:after {
+    width: 100%;
   }
 }
-

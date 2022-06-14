@@ -2,18 +2,20 @@
   <div class="catalog-page">
     <div class="container">
 
-      <h2 class="title catalog-page__title"> Pokemon names: </h2>
-      <ul class="list catalog-page__list">
+      <h1 class="title catalog-page__title"> Pokemons: </h1>
+
+      <ul class="catalog-page__list">
         <li 
-        class="list__item"
+        class="catalog-page__list-item"
         v-for="product of productsFromStore"
         :key="product.name" 
         > 
-
-        <a href="#" class="list__item-link" >
+        <router-link
+          class="link catalog-page__item-link"
+          :to = "{ name: 'about', params: { product_data: product.url, name: product.name } }"
+        > 
           {{ product.name }} 
-        </a>
-
+        </router-link>
         </li>
       </ul>
       
@@ -30,6 +32,11 @@ import { mapGetters,  mapActions } from 'vuex'
 
 export default {
   name: 'CatalogPage',
+  data () {
+    return {
+     forExample: 'data from catalogPage'
+    }
+  },
 
   methods: {
     ...mapActions(['GET_PRODUCTS_FROM_API',]),
@@ -71,10 +78,16 @@ export default {
     }
 
     &__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px 8px;
       margin-top: $mrg-mini;
     }
 
-   
+    &__list-item {}
+    &__item-link {}
+
   }
 
   

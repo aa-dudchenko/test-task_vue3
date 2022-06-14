@@ -18,7 +18,7 @@ export default createStore({
   actions: {
     async GET_PRODUCTS_FROM_API ({commit}) {
       try {
-        const products = await axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100');
+        const products = await axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1126');
         commit ('SET_PRODUCTS_TO_STATE', products.data.results);
         return products.data.results;
       } catch (error) {
