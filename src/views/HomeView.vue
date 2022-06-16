@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <h1 class="home__title"> Pokemons </h1>
+    <h1 class="home__title"> Pokemons- info </h1>
 
     <search-block/>
     <catalog-page/>

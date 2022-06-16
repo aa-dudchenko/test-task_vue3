@@ -18,19 +18,13 @@
         </router-link>
         </li>
       </ul>
-      
-      <!-- <pagination-block/> -->
 
       <div class="catalog-page__pagination">
-        <div
-            class="catalog-page__pagination-page"
-            v-for="page in pages"
-            key="page"
-            :class="{'catalog-page__pagination-page_active': page === pageNumber}"
-            @click="pageClick(page)"
-        >
-          {{ page }}
-        </div>
+         <pagination-block
+          :pages = "pages"
+          :pageNumber = "pageNumber"
+          @changedPageNumber = "pageNumber = $event"
+         />
       </div>
 
     </div>
@@ -54,21 +48,13 @@ export default {
 
   methods: {
     ...mapActions(['GET_PRODUCTS_FROM_API',]),
-
-    pageClick (page) {
-      this.pageNumber = page
-    }
   },
 
   computed: {
     ...mapGetters(['PRODUCTS']),
 
-    productsFromStore () {
-        return this.PRODUCTS
-    },
-
     pages () {
-      return Math.ceil (this.PRODUCTS.length / 100)
+      return Math.ceil (this.PRODUCTS.length / this.productPerPage)
     },
 
     paginatedProducts () {
@@ -112,37 +98,18 @@ export default {
       gap: 18px 8px;
       margin-top: $mrg-mini;
     }
-
     &__list-item {}
     &__item-link {}
 
     &__pagination {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      justify-content: center;
+      margin-top: $mrg-big;
     }
 
-    &__pagination-page {
-      margin-top: 20px;
-      padding: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
-      border: 0.5px solid $clr-white;
-      border-radius: 5px;
-      cursor: pointer;
-      min-width: 30px;
-      height: 30px;
-      
-      &:hover {
-        transition: all .3s;
-        background-color: $clr-blue;
-      }
 
-      &_active {
-        background-color: $clr-blue;
+    @media (max-width: 768px) {
+
+      &__list-item {
+         font-size: 20px;
       }
     }
 
