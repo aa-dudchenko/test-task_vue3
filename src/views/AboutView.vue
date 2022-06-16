@@ -27,21 +27,33 @@
 
           <p class="about__text about__text_ul"> Ability: </p>
           <ul class="about__list">
-            <li class="about__list-item" v-for="item of apiData.abilities">
+            <li
+                class="about__list-item"
+                v-for="item of apiData.abilities"
+                :key="item.ability.name"
+            >
               {{ item.ability.name }}
             </li>
           </ul>
 
           <p class="about__text about__text_ul"> Types: </p>
           <ul class="about__list">
-            <li class="about__list-item" v-for="item of apiData.types">
+            <li
+                class="about__list-item"
+                v-for="item of apiData.types"
+                :key="item.type.name"
+            >
               {{ item.type.name }}
             </li>
           </ul>
 
           <p class="about__text about__text_ul"> Stats: </p>
           <ul class="about__list">
-            <li class="about__list-item" v-for="item of apiData.stats">
+            <li
+                class="about__list-item"
+                v-for="item of apiData.stats"
+                :key="item.stat.name"
+            >
               {{ item.stat.name }} :
               <span class="about__list-item-value"> {{ item.base_stat }} </span>
             </li>
@@ -49,15 +61,23 @@
 
           <p class="about__text about__text_ul"> Game indices: </p>
           <ul class="about__list">
-            <li class="about__list-item" v-for="item of apiData.game_indices">
+            <li
+                class="about__list-item"
+                v-for="item of apiData.game_indices"
+                :key="item.version.name"
+            >
               {{ item.version.name }} :
               <span class="about__list-item-value"> {{ item.game_index }} </span>
             </li>
           </ul>
 
-          <p class="about__text about__text_ul"> Movies with this character: </p>
+          <p class="about__text about__text_ul"> Moves: </p>
           <ul class="about__list">
-            <li class="about__list-item" v-for="item of apiData.moves">
+            <li
+                class="about__list-item"
+                v-for="item of apiData.moves"
+                :key="item.move.name"
+            >
               {{ item.move.name }}
             </li>
           </ul>

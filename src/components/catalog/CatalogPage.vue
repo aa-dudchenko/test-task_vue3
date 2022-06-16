@@ -7,7 +7,7 @@
       <ul class="catalog-page__list">
         <li 
         class="catalog-page__list-item"
-        v-for="product of productsFromStore"
+        v-for="product of paginatedProducts"
         :key="product.name" 
         > 
         <router-link
@@ -21,6 +21,18 @@
       
       <!-- <pagination-block/> -->
 
+      <div class="catalog-page__pagination">
+        <div
+            class="catalog-page__pagination-page"
+            v-for="page in pages"
+            key="page"
+            :class="{'catalog-page__pagination-page_active': page === pageNumber}"
+            @click="pageClick(page)"
+        >
+          {{ page }}
+        </div>
+      </div>
+
     </div>
   </div>
     
@@ -32,14 +44,20 @@ import { mapGetters,  mapActions } from 'vuex'
 
 export default {
   name: 'CatalogPage',
+
   data () {
     return {
-     forExample: 'data from catalogPage'
+      productPerPage: 100,
+      pageNumber: 1
     }
   },
 
   methods: {
     ...mapActions(['GET_PRODUCTS_FROM_API',]),
+
+    pageClick (page) {
+      this.pageNumber = page
+    }
   },
 
   computed: {
@@ -48,6 +66,16 @@ export default {
     productsFromStore () {
         return this.PRODUCTS
     },
+
+    pages () {
+      return Math.ceil (this.PRODUCTS.length / 100)
+    },
+
+    paginatedProducts () {
+      let from = (this.pageNumber - 1) * this.productPerPage
+      let to = from + this.productPerPage
+      return this.PRODUCTS.slice( from, to )
+    }
   },
 
   mounted () {
@@ -87,6 +115,36 @@ export default {
 
     &__list-item {}
     &__item-link {}
+
+    &__pagination {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: center;
+    }
+
+    &__pagination-page {
+      margin-top: 20px;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      border: 0.5px solid $clr-white;
+      border-radius: 5px;
+      cursor: pointer;
+      min-width: 30px;
+      height: 30px;
+      
+      &:hover {
+        transition: all .3s;
+        background-color: $clr-blue;
+      }
+
+      &_active {
+        background-color: $clr-blue;
+      }
+    }
 
   }
 
