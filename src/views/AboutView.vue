@@ -117,16 +117,16 @@ export default {
 
   methods: {
     async getPokemonData () {
-    try {
-        const products=await axios.get(this.urlApi)
-        // console.log(products.data)
-        this.apiData = products.data
-        return products.data
-      } catch(error) {
-        console.log(error)
-        return error
-      }
-  }
+      try {
+          const products=await axios.get(this.urlApi)
+          // console.log(products.data)
+          this.apiData = products.data
+          return products.data
+        } catch(error) {
+          console.log(error)
+          return error
+        }
+    }
   },
 
   computed: {

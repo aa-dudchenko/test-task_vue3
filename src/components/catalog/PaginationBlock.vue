@@ -1,40 +1,40 @@
 <template>
-<div class="pagination-block">
+  <div class="pagination-block">
 
-    <div
-        class="pagination-block__page"
-        v-for="page in pages"
-        key="page"
-        :class="{'pagination-block__page_active': page === pageNumber}"
-        @click="pageClick(page)"
-    >
-      {{ page }}
-    </div>
+      <div
+          class="pagination-block__page"
+          v-for="page in pages"
+          key="page"
+          :class="{'pagination-block__page_active': page === pageNumber}"
+          @click="pageClick(page)"
+      >
+        {{ page }}
+      </div>
 
-</div>
+  </div>
 </template>
 
 
 <script>
-export default {
-  name: 'PaginationBlock',
+  export default {
+    name: 'PaginationBlock',
 
-  props: {
-    pages: {
-      type: Number,
+    props: {
+      pages: {
+        type: Number,
+      },
+      page_number: {
+        type: Number,
+      }
     },
-    pageNumber: {
-      type: Number,
-    }
-  },
 
-  methods: {
-    pageClick(page) {
-      this.$emit('changedPageNumber', page)
+    methods: {
+      pageClick(page) {
+        this.$emit('changedPageNumber', page)
+      }
     }
+
   }
-  
-}
 </script>
 
 
@@ -70,6 +70,7 @@ export default {
         background-color: $clr-blue;
       }
     }
+
   }
 
 </style>
