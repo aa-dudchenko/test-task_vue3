@@ -1,4 +1,3 @@
-<!--  <img :src="'https:/apple.com/ac/structured-data/images/knowledge_graph_logo.png?202203080231'" alt="img">  -->
 <template>
   <div class="container">
     <div class="about">
@@ -85,62 +84,57 @@
         </div>
 
       </div>
-      
 
-    
     </div>
   </div>
 </template>
 
 
 <script>
-import axios from 'axios'
+  import axios from 'axios'
 
-export default {
-  name: 'AboutView',
+  export default {
+    name: 'AboutView',
 
-  props: {
-    product_data: {
-      type: String,
-      default () {
-        return ''
+    props: {
+      pokemon_index: {
+        type: Number
       }
-    }
-  },
+    },
 
-  data () {
-    return {
-      urlApi: this.product_data,
-      apiData: {},
-    }
-  },
+    data () {
+      return {
+        pokemonNumber: this.pokemon_index,
+        apiData: {},
+      }
+    },
 
-  methods: {
-    async getPokemonData () {
-      try {
-          const products=await axios.get(this.urlApi)
-          // console.log(products.data)
-          this.apiData = products.data
-          return products.data
-        } catch(error) {
-          console.log(error)
-          return error
-        }
-    }
-  },
+    methods: {
+      async getPokemonData () {
+        try {
+            const products=await axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pokemonNumber}/`)
+            // console.log(products.data)
+            this.apiData = products.data
+            return products.data
+          } catch(error) {
+            console.log(error)
+            return error
+          }
+      }
+    },
 
-  computed: {
-    imgSrc () {
-      return this.apiData.sprites?.other['official-artwork']?.front_default
-    }
-  },
+    computed: {
+      imgSrc () {
+        return this.apiData.sprites?.other['official-artwork']?.front_default
+      }
+    },
 
-  mounted () {
-    this.getPokemonData ()
-  },
+    mounted () {
+      this.getPokemonData ()
+    },
 
-  
-}
+
+  }
 </script>
 
 

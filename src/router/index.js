@@ -9,7 +9,7 @@ const routes = [
     component: CatalogPage
   },
   {
-    path: '/about-:name',
+    path: '/about-pokemon/:pokemon_index',
     name: 'about',
     component: AboutProduct,
     props: true

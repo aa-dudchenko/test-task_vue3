@@ -3,12 +3,12 @@
 
     <li
         class="list-block__item"
-        v-for="product of paginated_roducts"
+        v-for="(product, index) of paginated_products"
         :key="product.name"
     >
       <router-link
           class="link list-block__item-link"
-          :to = "{ name: 'about', params: { product_data: product.url, name: product.name } }"
+          :to = "{ name: 'about', params: { pokemon_index: index + 1, name: product.name } }"
       >
         {{ product.name }}
       </router-link>
@@ -21,7 +21,7 @@
 <script>
   export default {
     props: {
-      paginated_roducts: {
+      paginated_products: {
         type: Array,
         default() {
           return [];

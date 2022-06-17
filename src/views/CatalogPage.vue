@@ -10,7 +10,7 @@
     <div class="catalog-page__list">
       <div class="container">
         <h1 class="title catalog-page__list-title"> Pokemon's: </h1>
-        <list-block :paginated_roducts = "paginatedProducts" />
+        <list-block :paginated_products = "paginatedProducts" />
       </div>
     </div>
 
