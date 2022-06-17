@@ -49,29 +49,49 @@
         searchQuery: '',
 
         productsPerPage: 100,
-        pageNumber: 1
+        pageNumber: 1,
+
+        filteredProducts: []
+      }
+    },
+
+    watch: {
+      searchQuery (newQuery,oldQuery) {
+       this.filterProducts ()
       }
     },
 
     methods: {
       ...mapActions(['GET_PRODUCTS_FROM_API',]),
+      //
+      filterProducts () {
+        sessionStorage.setItem('searchedByQuery', this.searchQuery)
+        if (this.searchQuery !== '') {
+          const filterResult =  this.PRODUCTS.filter( product => {
+            return product.name.toLowerCase().indexOf(this.searchQuery.trim().toLowerCase()) !== -1
+          })
+          this.filteredProducts = [...filterResult]
+        } else {
+          this.filteredProducts = this.PRODUCTS
+        }
+      }
     },
 
     computed: {
       ...mapGetters(['PRODUCTS']),
 
-      filteredProducts () {
-        if (this.searchQuery !== '') {
-          const filterResult =  this.PRODUCTS.filter( product => {
-            return product.name.toLowerCase().indexOf(this.searchQuery.trim().toLowerCase()) !== -1
-          })
-          sessionStorage.setItem('filteredResult', JSON.stringify(filterResult))
-          sessionStorage.setItem('searchedByQuery', this.searchQuery)
-          return filterResult
-        } else {
-          return this.PRODUCTS
-        }
-      },
+      // filteredProducts () {
+      //   if (this.searchQuery !== '') {
+      //     const filterResult =  this.PRODUCTS.filter( product => {
+      //       return product.name.toLowerCase().indexOf(this.searchQuery.trim().toLowerCase()) !== -1
+      //     })
+      //     sessionStorage.setItem('filteredResult', JSON.stringify(filterResult))
+      //     sessionStorage.setItem('searchedByQuery', this.searchQuery)
+      //     return filterResult
+      //   } else {
+      //     return this.PRODUCTS
+      //   }
+      // },
 
       pages () {
         const availablePages =  Math.ceil (this.filteredProducts.length / this.productsPerPage)
@@ -95,8 +115,9 @@
               console.log('DATA RECEIVED')
             } else { console.log('DATA WAS NOT RECEIVED') }
           })
+            .then(() => this.filterProducts() )
 
-      const storedFilterResult = sessionStorage.getItem('filteredResult')
+
       const storedSearchQuery = sessionStorage.getItem('searchedByQuery')
       // console.log(storedSearchQuery, storedFilterResult)
       if (storedSearchQuery !== null) {

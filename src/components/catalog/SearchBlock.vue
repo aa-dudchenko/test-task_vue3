@@ -5,7 +5,7 @@
       <form
           class="search-block__form" action=""
           @click = "openSearch"
-          :class="{ 'search-block__form_active': isActive }"
+          :class="{ 'search-block__form_active': isActive || searchQuery.length > 0}"
       >
         <input
             class="search-block__input"
@@ -13,7 +13,7 @@
             v-on:input = "changeSearchQuery"
             v-model = "searchQuery"
         >
-        <svg class="search-block__icon" enable-background="new 0 0 26 32" id="Glyph" version="1.1" viewBox="0 0 26 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_"/></svg>
+        <svg class="search-block__icon" viewBox="0 0 26 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z"/></svg>
       </form>
 
     </div>
@@ -35,12 +35,6 @@
         searchQuery: '',
       }
     },
-
-    watch: {
-      search_query() {
-        this.searchQuery = this.search_query
-      },
-    },
     
     methods: {
       openSearch () {
@@ -50,6 +44,12 @@
       changeSearchQuery() {
         this.$emit('changedSearchQuery', this.searchQuery)
       }
+    },
+
+    watch: {
+      search_query() {
+        this.searchQuery = this.search_query
+      },
     },
 
   }
@@ -78,18 +78,18 @@
       padding: 5px;
 
       &:hover,
-      &:active {
+      &_active {
         width: 250px;
         cursor: pointer;
       }
 
       &:hover .search-block__input,
-      &:active .search-block__input {
+      &_active .search-block__input {
          display: block;
       }
 
       &:hover .search-block__icon,
-      &:active .search-block__icon {
+      &_active .search-block__icon {
         background: $clr-dark;
         color: $clr-white;
         fill: $clr-white;
