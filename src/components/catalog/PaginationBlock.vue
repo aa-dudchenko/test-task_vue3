@@ -5,7 +5,7 @@
           class="pagination-block__page"
           v-for="page in pages"
           key="page"
-          :class="{'pagination-block__page_active': page === pageNumber}"
+          :class="{'pagination-block__page_active': page === page_number}"
           @click="pageClick(page)"
       >
         {{ page }}
