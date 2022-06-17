@@ -25,6 +25,10 @@
   export default {
     name: 'SearchBlock',
 
+    props: {
+      search_query: String
+    },
+
     data () {
       return {
         isActive: false,
@@ -32,6 +36,12 @@
       }
     },
 
+    watch: {
+      search_query() {
+        this.searchQuery = this.search_query
+      },
+    },
+    
     methods: {
       openSearch () {
         this.isActive = !this.isActive
@@ -40,7 +50,8 @@
       changeSearchQuery() {
         this.$emit('changedSearchQuery', this.searchQuery)
       }
-    }
+    },
+
   }
 </script>
 

@@ -4,7 +4,10 @@
     <h1 class="catalog-page__title"> Pokemon - info </h1>
 
     <div class="catalog-page__search">
-      <search-block @changedSearchQuery = "searchQuery = $event" />
+      <search-block
+          @changedSearchQuery = "searchQuery = $event"
+          :search_query = "searchQuery"
+      />
     </div>
 
     <div class="catalog-page__list">
@@ -59,9 +62,12 @@
 
       filteredProducts () {
         if (this.searchQuery !== '') {
-          return  this.PRODUCTS.filter( product => {
+          const filterResult =  this.PRODUCTS.filter( product => {
             return product.name.toLowerCase().indexOf(this.searchQuery.trim().toLowerCase()) !== -1
           })
+          sessionStorage.setItem('filteredResult', JSON.stringify(filterResult))
+          sessionStorage.setItem('searchedByQuery', this.searchQuery)
+          return filterResult
         } else {
           return this.PRODUCTS
         }
@@ -89,6 +95,13 @@
               console.log('DATA RECEIVED')
             } else { console.log('DATA WAS NOT RECEIVED') }
           })
+
+      const storedFilterResult = sessionStorage.getItem('filteredResult')
+      const storedSearchQuery = sessionStorage.getItem('searchedByQuery')
+      // console.log(storedSearchQuery, storedFilterResult)
+      if (storedSearchQuery !== null) {
+        this.searchQuery = storedSearchQuery
+      }
     },
 
   }
