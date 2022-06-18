@@ -51,19 +51,24 @@
         productsPerPage: 100,
         pageNumber: 1,
 
-        filteredProducts: []
+        filteredProducts: [],
       }
     },
 
     watch: {
-      searchQuery (newQuery,oldQuery) {
+
+      searchQuery () {
        this.filterProducts ()
+      },
+
+      pageNumber () {
+        sessionStorage.setItem('selectedPage', this.pageNumber)
       }
     },
 
     methods: {
       ...mapActions(['GET_PRODUCTS_FROM_API',]),
-      //
+
       filterProducts () {
         sessionStorage.setItem('searchedByQuery', this.searchQuery)
         if (this.searchQuery !== '') {
@@ -74,28 +79,17 @@
         } else {
           this.filteredProducts = this.PRODUCTS
         }
-      }
+      },
+
     },
 
     computed: {
       ...mapGetters(['PRODUCTS']),
 
-      // filteredProducts () {
-      //   if (this.searchQuery !== '') {
-      //     const filterResult =  this.PRODUCTS.filter( product => {
-      //       return product.name.toLowerCase().indexOf(this.searchQuery.trim().toLowerCase()) !== -1
-      //     })
-      //     sessionStorage.setItem('filteredResult', JSON.stringify(filterResult))
-      //     sessionStorage.setItem('searchedByQuery', this.searchQuery)
-      //     return filterResult
-      //   } else {
-      //     return this.PRODUCTS
-      //   }
-      // },
-
       pages () {
         const availablePages =  Math.ceil (this.filteredProducts.length / this.productsPerPage)
-        if (availablePages < this.pageNumber) {
+        console.log(availablePages)
+        if (availablePages > 0 && availablePages < this.pageNumber) {
           this.pageNumber = 1
         }
         return availablePages
@@ -115,14 +109,21 @@
               console.log('DATA RECEIVED')
             } else { console.log('DATA WAS NOT RECEIVED') }
           })
-            .then(() => this.filterProducts() )
-
+            .then(() => {
+              this.filterProducts()
+            })
 
       const storedSearchQuery = sessionStorage.getItem('searchedByQuery')
       // console.log(storedSearchQuery, storedFilterResult)
       if (storedSearchQuery !== null) {
         this.searchQuery = storedSearchQuery
       }
+
+      const storedPageNumber = sessionStorage.getItem('selectedPage')
+      if (storedPageNumber !== null) {
+        this.pageNumber = Number(storedPageNumber)
+      }
+
     },
 
   }
