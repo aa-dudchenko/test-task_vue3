@@ -11,7 +11,7 @@
 * доп. окно с более подробной информацией товара
 * Сохранение состояние страницы при перезагрузке
 
-( Также смотрите аналог проекта, переписанный на composition API: ***https://github.com/aa-dudchenko/-test-task_vue3-composition*** )
+Также смотрите аналог проекта, переписанный на composition API: ***https://github.com/aa-dudchenko/-test-task_vue3-composition*** 
 
 ***
 ## Project setup
