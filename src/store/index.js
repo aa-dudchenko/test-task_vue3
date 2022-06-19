@@ -5,16 +5,19 @@ export default createStore({
   state: {
     products: []
   },
+
   getters: {
     PRODUCTS (state) {
       return state.products;
     },
   },
+
   mutations: {
     SET_PRODUCTS_TO_STATE: ( state, products ) => {
       state.products = products
     }
   },
+
   actions: {
     async GET_PRODUCTS_FROM_API ({commit}) {
       try {
@@ -27,6 +30,5 @@ export default createStore({
       }
     },
   },
-  modules: {
-  }
+  
 })

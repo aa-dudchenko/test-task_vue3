@@ -2,13 +2,13 @@
   <ul class="list-block">
 
     <li
-        class="list-block__item"
-        v-for="(product, index) of paginated_products"
-        :key="product.name"
+      class="list-block__item"
+      v-for="(product, index) of paginated_products"
+      :key="product.name"
     >
       <router-link
-          class="link list-block__item-link"
-          :to = "{ name: 'about', params: { pokemon_index: index + 1, name: product.name } }"
+        class="link list-block__item-link"
+        :to = "{ name: 'about', params: { pokemon_index: index + 1, name: product.name } }"
       >
         {{ product.name }}
       </router-link>

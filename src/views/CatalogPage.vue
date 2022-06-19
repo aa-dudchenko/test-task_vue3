@@ -5,8 +5,8 @@
 
     <div class="catalog-page__search">
       <search-block
-          :search_query = "searchQuery"
-          @changedSearchQuery = "searchQuery = $event"
+        :search_query = "searchQuery"
+        @changedSearchQuery = "searchQuery = $event"
       />
     </div>
 
@@ -19,9 +19,9 @@
 
     <div class="catalog-page__pagination">
       <pagination-block
-          :pages = "pages"
-          :page_number = "pageNumber"
-          @changedPageNumber = "pageNumber = $event"
+        :pages = "pages"
+        :page_number = "pageNumber"
+        @changedPageNumber = "pageNumber = $event"
       />
     </div>
 
@@ -56,9 +56,8 @@
     },
 
     watch: {
-
       searchQuery () {
-       this.filterProducts ()
+        this.filterProducts ()
         if (this.searchQuery === '') {
           this.pageNumber = 1
         }
@@ -106,14 +105,14 @@
 
     mounted () {
       this.GET_PRODUCTS_FROM_API()
-          .then( response => {
-            if(response) {
-              console.log('DATA RECEIVED')
-            } else { console.log('DATA WAS NOT RECEIVED') }
+        .then( response => {
+          if(response) {
+            console.log('DATA RECEIVED')
+          } else { console.log('DATA WAS NOT RECEIVED') }
+        })
+          .then(() => {
+            this.filterProducts()
           })
-            .then(() => {
-              this.filterProducts()
-            })
 
       const storedSearchQuery = sessionStorage.getItem('searchedByQuery')
       // console.log(storedSearchQuery, storedFilterResult)
