@@ -5,8 +5,8 @@
 
     <div class="catalog-page__search">
       <search-block
-          @changedSearchQuery = "searchQuery = $event"
           :search_query = "searchQuery"
+          @changedSearchQuery = "searchQuery = $event"
       />
     </div>
 
@@ -59,6 +59,9 @@
 
       searchQuery () {
        this.filterProducts ()
+        if (this.searchQuery === '') {
+          this.pageNumber = 1
+        }
       },
 
       pageNumber () {
@@ -88,7 +91,6 @@
 
       pages () {
         const availablePages =  Math.ceil (this.filteredProducts.length / this.productsPerPage)
-        console.log(availablePages)
         if (availablePages > 0 && availablePages < this.pageNumber) {
           this.pageNumber = 1
         }

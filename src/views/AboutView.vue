@@ -24,7 +24,7 @@
             <span class="about__text-value"> {{ apiData.base_experience }} </span>
           </p>
 
-          <p class="about__text about__text_ul"> Abilities: </p>
+          <p class="about__text about__text_ul"> Abilities assigned to a character: </p>
           <ul class="about__list">
             <li
                 class="about__list-item"
