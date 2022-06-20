@@ -132,7 +132,6 @@
 
 
 <style lang="scss">
-  @import '../styles/style.scss';
 
   .catalog-page {
 

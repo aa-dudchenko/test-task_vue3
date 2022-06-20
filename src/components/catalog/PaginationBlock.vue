@@ -39,7 +39,6 @@
 
 
 <style lang="scss">
-  @import '../../styles/style.scss';
 
   .pagination-block {
     display: flex;
